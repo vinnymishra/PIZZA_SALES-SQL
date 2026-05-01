@@ -2,7 +2,7 @@
 
 **Project Overview**: This project focuses on analyzing a pizza sales dataset using MySQL to extract meaningful business insights. The goal is to understand customer behavior, sales patterns, and revenue trends by writing efficient SQL queries.
 
-
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 **Objectives**:
