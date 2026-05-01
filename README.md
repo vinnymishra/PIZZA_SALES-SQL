@@ -27,7 +27,7 @@ Studied hourly order trends to understand peak hours
 Calculated average number of pizzas ordered per day
 Identified top 3 pizzas based on revenue
 Computed percentage contribution of each pizza type to total revenue
-Analyzed cumulative revenue over time
+Analyzed cummulative revenue over time
 
 
 **Concepts Used**:
