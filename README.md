@@ -9,7 +9,6 @@ Analyze total orders and revenue generated
 
 Identify top-performing pizzas and categories
 
-
 Understand customer ordering patterns (time & date)
 
 Calculate revenue contribution and sales distribution
