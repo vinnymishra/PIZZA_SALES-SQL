@@ -22,24 +22,40 @@ _Language_: SQL
 
 
 **Key Analysis Performed**:
+
 Retrieved total number of orders placed
+
 Calculated total revenue generated from pizza sales
+
 Identified the highest priced pizza
+
 Found the most commonly ordered pizza size
+
 Listed top 5 most ordered pizza types with quantities
+
 Analyzed category-wise pizza distribution using JOIN
+
 Studied hourly order trends to understand peak hours
+
 Calculated average number of pizzas ordered per day
+
 Identified top 3 pizzas based on revenue
+
 Computed percentage contribution of each pizza type to total revenue
+
 Analyzed cummulative revenue over time
 
 
 **Concepts Used**:
+
 _SQL Queries_: SELECT, WHERE, ORDER BY, GROUP BY
+
 _Aggregate Functions_: SUM(), AVG(), COUNT()
+
 _Joins_: INNER JOIN
+
 _Subqueries_
+
 _Data aggregation & filtering_
 
 
