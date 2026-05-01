@@ -15,6 +15,7 @@ Calculate revenue contribution and sales distribution
 
 
 **Tech Stack**:
+
 _Database_: MySQL
 
 _Language_: SQL
