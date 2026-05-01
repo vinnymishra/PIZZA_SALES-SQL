@@ -70,6 +70,7 @@ _Data aggregation & filtering_
 
 
 **Dataset Description**:
+
 The dataset contains multiple tables such as:
 
 _Orders_ : order ID, date, time
@@ -116,6 +117,8 @@ Add data visualization using Power BI or Tableau
 Optimize queries for better performance
 
 Include stored procedures and views
+
+
 
 
 **Learning Outcomes**:
