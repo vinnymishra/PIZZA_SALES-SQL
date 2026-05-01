@@ -4,6 +4,7 @@
 
 
 **Objectives**:
+
 Analyze total orders and revenue generated
 
 Identify top-performing pizzas and categories
