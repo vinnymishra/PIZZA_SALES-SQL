@@ -1,11 +1,11 @@
-**Pizza Sales Data Analysis using MySQL**:
+# Pizza Sales Data Analysis using MySQL:
 
 **Project Overview**: This project focuses on analyzing a pizza sales dataset using MySQL to extract meaningful business insights. The goal is to understand customer behavior, sales patterns, and revenue trends by writing efficient SQL queries.
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-**Objectives**:
+# Objectives:
 
 Analyze total orders and revenue generated
 
@@ -18,7 +18,7 @@ Calculate revenue contribution and sales distribution
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-**Tech Stack**:
+# Tech Stack:
 
 _Database_: MySQL
 
@@ -27,34 +27,126 @@ _Language_: SQL
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-**Key Analysis Performed**:
+# Key Analysis Performed:
 
-Retrieved total number of orders placed
+**Retrieved total number of orders placed:**
+```
+SELECT count(order_id) as total_orders FROM orders;
+```
 
-Calculated total revenue generated from pizza sales
 
-Identified the highest priced pizza
+**Calculated total revenue generated from pizza sales:**
+```
+SELECT
+ROUND(SUM(order_details.quantity * pizzas.price),2) AS total_revenue
+FROM order_details JOIN pizzas
+ON pizzas.pizza_id = order_details.pizza_id;
+```
 
-Found the most commonly ordered pizza size
 
-Listed top 5 most ordered pizza types with quantities
+**Identified the highest priced pizza:**
+```
+SELECT pizza_types.name, pizzas.price
+FROM pizza_types JOIN pizzas
+ON pizza_types.pizza_type_id = pizzas.pizza_type_id
+ORDER BY pizzas.price DESC LIMIT 1;
+```
 
-Analyzed category-wise pizza distribution using JOIN
 
-Studied hourly order trends to understand peak hours
+**Found the most commonly ordered pizza size:**
+```
+SELECT pizzas.size,count(order_details.order_details_id) AS order_count
+FROM pizzas JOIN order_details
+ON pizzas.pizza_id = order_details.pizza_id
+GROUP BY pizzas.size ORDER BY order_count DESC;
+```
 
-Calculated average number of pizzas ordered per day
 
-Identified top 3 pizzas based on revenue
+**Listed top 5 most ordered pizza types with quantities:**
+```
+SELECT pizza_types.name,
+sum(order_details.quantity) AS quantity
+FROM pizza_types JOIN pizzas
+ON pizza_types.pizza_type_id = pizzas.pizza_type_id
+JOIN order_details
+ON order_details.pizza_id = pizzas.pizza_id
+GROUP BY pizza_types.name ORDER BY quantity DESC LIMIT 5;
+```
 
-Computed percentage contribution of each pizza type to total revenue
 
-Analyzed cummulative revenue over time
+**Analyzed category-wise pizza distribution using JOIN:**
+```
+SELECT pizza_types.category,
+sum(order_details.quantity) AS quantity
+FROM pizza_types JOIN pizzas
+ON pizza_types.pizza_type_id = pizzas.pizza_type_id
+JOIN order_details
+ON order_details.pizza_id = pizzas.pizza_id
+GROUP BY pizza_types.category ORDER BY quantity DESC;
+```
+
+
+**Studied hourly order trends to understand peak hours:**
+```
+SELECT hour(order_time) AS hour,count(order_id) AS order_count FROM orders
+GROUP BY hour(order_time);
+```
+
+
+**Calculated average number of pizzas ordered per day:**
+```
+SELECT round(avg(quantity),0) AS avg_pizza_ordered_per_day FROM
+(SELECT orders.order_date,sum(order_details.quantity) AS quantity
+FROM orders JOIN order_details
+ON orders.order_id = order_details.order_id
+GROUP BY orders.order_date) AS order_quantity;
+```
+
+
+**Identified top 3 pizzas based on revenue:**
+```
+SELECT pizza_types.name,
+sum(order_details.quamtity * pizzas.price) AS revenue
+FROM pizza_types JOIN pizzas
+ON pizzas.pizza_type_id = pizza_types.pizza_type_id
+JOIN order_details
+ON order_details.pizza_id = pizzas.pizza_id
+GROUP BY pizza_types.name
+```
+
+
+**Computed percentage contribution of each pizza type to total revenue:**
+```
+SELECT pizza_types.category,
+round((sum(order_details.quantity * pizzas.price) / (SELECT round(sum(order_details.quantity * pizzas.price),2) AS total_sales
+FROM order_details JOIN pizzas ON pizzas.pizza_id = order_details.pizza_id))*100,2) AS revenue
+FROM pizza_types JOIN pizzas
+ON pizza_types.pizza_type_id = pizzas.pizza_type_id
+JOIN order_details
+ON order_details.pizza_id = pizzas.pizza_id
+GROUP BY pizza_types.category ORDER BY revenue DESC;
+```
+
+
+**Analyzed cummulative revenue over time:**
+```
+SELECT order_date,
+sum(revenue) OVER(ORDER BY order_date) AS cum_revenue
+FROM
+(SELECT orders.order_date,
+sum(order_details.quantity * pizzas.price) AS revenue
+FROM order_details JOIN pizzas
+ON order_details.pizza_id = pizzas.pizza_id
+JOIN orders
+ON orders.order_id = order_details.order_id
+GROUP BY orders.order_date) AS sales;
+```
+
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-**Concepts Used**:
+# Concepts Used:
 
 _SQL Queries_: SELECT, WHERE, ORDER BY, GROUP BY
 
@@ -69,7 +161,7 @@ _Data aggregation & filtering_
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-**Dataset Description**:
+# Dataset Description:
 
 The dataset contains multiple tables such as:
 
@@ -84,7 +176,7 @@ _Pizza Types_ : name, category
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-**Key Insights**:
+# Key Insights:
 
 Identified peak ordering hours during the day
 
@@ -97,7 +189,7 @@ Determined category-wise sales distribution
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-**How to Run**:
+# How to Run:
 
 Import the dataset into MySQL
 
@@ -110,7 +202,7 @@ Analyze the outputs for insights
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-**Future Improvements**:
+# Future Improvements**:
 
 Add data visualization using Power BI or Tableau
 
@@ -121,7 +213,7 @@ Include stored procedures and views
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-**Learning Outcomes**:
+# Learning Outcomes:
 
 Strong understanding of SQL fundamentals
 
